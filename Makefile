@@ -6,7 +6,7 @@
 #    By: kmckee <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 10:55:28 by kmckee            #+#    #+#              #
-#    Updated: 2017/11/28 17:25:55 by kmckee           ###   ########.fr        #
+#    Updated: 2017/11/30 12:00:34 by kmckee           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,6 +21,7 @@ FILES		=	ft_printf \
 				int_format hex_format \
 				octal_format unsigned_format \
 				percent_format width_format \
+				pointer_format \
 				print_max \
 
 SRC_FILES	= 	$(addprefix $(SRC), $(FILES))
