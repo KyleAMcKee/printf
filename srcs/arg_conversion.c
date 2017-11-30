@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 22:51:16 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/28 16:42:42 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/11/30 12:03:48 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_type	u_arg_conversion(t_type type, va_list ap)
 {
 
-	if (type.length.l == 1)
+	if (type.length.l == 1 || type.type == 'p')
 		type.result.u_num_jug = va_arg(ap, unsigned long);
 	else if (type.length.ll == 1)
 		type.result.u_num_jug = va_arg(ap, unsigned long long);

@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:02:32 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/30 11:40:36 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/11/30 12:07:12 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	type_handler(t_type type, va_list ap)
 		return (octal_format(type, ap));
 	if (type.type == 'u' || type.type == 'U')
 		return (unsigned_format(type, ap));
+	if (type.type == 'p')
+		return (pointer_format(type, ap));
 //	ft_putstr("not a valid type\n");
 	return (0);
 }
