@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:39:24 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/29 12:06:46 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/11/30 22:32:17 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	ft_printf(const char *restrict format, ...)
 			write(1, &format[start], i - start);
 			type.ret += (i++ - start);
 			type = check_flags(format, type, &i);
+//			print_status(type);
+			if (!type.type)
+				return (type.ret);
 			type.ret += type_handler(type, ap);
 			start = i;
 		}

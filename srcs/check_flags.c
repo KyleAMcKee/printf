@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:32:55 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/29 15:01:16 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/11/30 20:15:50 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ t_type	check_width(const char *str, t_type type, int *i)
 {
 	int temp;
 
-	if (ft_isdigit(str[*i]))
+	if (ft_isdigit(str[*i]) && !type.width)
 	{
 			type.width = ft_atoi(&str[*i]);
 			temp = type.width;
-			if (type.flags.left != 1)	
+			if (!type.flags.left && !type.flags.zero)
 				type.flags.right = 1;
 			while (temp /= 10)
 			*i += 1;
@@ -70,6 +70,7 @@ t_type	check_width(const char *str, t_type type, int *i)
 	if (str[*i] == '-')
 	{
 		type.flags.left = 1;
+		type.flags.zero = 0;
 		if (str[*i + 1] == '0')
 			*i += 1;
 		if (is_flag(str[*i + 1]) || (check_conv(str[*i + 1], type) >= 0))
@@ -81,7 +82,7 @@ t_type	check_width(const char *str, t_type type, int *i)
 	}
 	else if (str[*i] == '.')
 	{
-		type.flags.precision = 1;
+		type.flags.precision += 1;
 		if (ft_isdigit(str[*i + 1]))
 			type.w_precision = ft_atoi(&str[++*i]);
 		else
@@ -99,8 +100,8 @@ t_type	check_width(const char *str, t_type type, int *i)
 t_type	zero_padding(const char *str, t_type type, int *i)
 {
 	int temp;
-
-	type.flags.zero = 1;
+	if (!type.flags.right && !type.flags.left)
+		type.flags.zero += 1;
 	if (!ft_isdigit(str[*i +1]))
 		return (type);
 	type.width = ft_atoi(&str[++*i]);
@@ -110,26 +111,46 @@ t_type	zero_padding(const char *str, t_type type, int *i)
 	return(type);
 }
 
+t_type	check_check(const char *str, t_type type, int *i)
+{
+	while (is_flag(str[*i]) || ft_isdigit(str[*i]))
+	{
+			if (str[*i] == '0' && !type.width)
+				type = zero_padding(str, type, i);
+			else if ((ft_isdigit(str[*i]) || str[*i] == '.' || str[*i] == '-'))
+				type = check_width(str, type, i);
+			else if (str[*i] == '#')
+				type.flags.hash = 1;
+			else if (str[*i] == '+')
+				type.flags.plus = 1;
+			else if (str[*i] == ' ')
+				type.flags.space = 1;
+			*i += 1;
+	}
+	return (type);
+}
+	
+
 t_type	check_flags(const char *str, t_type type, int *i)
 {
 	type = clear_flags(type);
-	while (is_flag(str[*i]) || ft_isdigit(str[*i]))
-	{
-		if (str[*i] == '0')
-			type = zero_padding(str, type, i);
-		else if (ft_isdigit(str[*i]) || str[*i] == '.' || str[*i] == '-')
-			type = check_width(str, type, i);
-		else if (str[*i] == '#')
-			type.flags.hash = 1;
-		else if (str[*i] == '+')
-			type.flags.plus = 1;
-		else if (str[*i] == ' ')
-			type.flags.space = 1;
-
-		*i += 1;
-	}
+	type = check_check(str, type, i);
 	type = check_length(str, type, i);
+	type = check_check(str, type, i);
 	type.type = str[*i];
+	if (check_conv(type.type, type) == -1 && ft_isalpha(type.type))
+	{	
+		if (!is_len(type.type))
+		{
+			ft_putchar(type.type);
+			type.ret++;
+		}
+	}	
+	if (type.flags.zero > 1)
+	{
+		type.flags.zero = 0;
+		type.flags.right = 1;
+	}
 	*i += 1;
 	return (type);
 }
