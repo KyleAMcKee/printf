@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/30 20:23:18 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/11/30 23:59:28 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct		s_length
 
 typedef union
 {
-	char			chr;
+	wchar_t			chr;
 	char			*str;
 	intmax_t		num_jug;
 	uintmax_t		u_num_jug;
