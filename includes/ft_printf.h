@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/30 12:00:02 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/11/30 20:23:18 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,10 @@ int 	percent_format(t_type type);
 int		pointer_format(t_type type, va_list ap);
 int		width_format(t_type type, int amount, int digits);
 int		width_format_after(t_type type, int amount);
+int		display_sign(t_type type);
+int		right_justify(t_type type, int digits);
+int		prepend_zero(t_type type, int digits);
+int		prepend_space(t_type, int digits);
+int		is_len(char c);
 void	print_max(intmax_t num);
 void	print_status(t_type type);

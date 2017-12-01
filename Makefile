@@ -6,7 +6,7 @@
 #    By: kmckee <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 10:55:28 by kmckee            #+#    #+#              #
-#    Updated: 2017/11/30 12:00:34 by kmckee           ###   ########.fr        #
+#    Updated: 2017/11/30 14:41:39 by kmckee           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -47,6 +47,11 @@ $(NAME):
 test:
 	make re
 	$(CC) $(FLAGS) -o test main.c print_status.c $(NAME)
+	make clean
+
+undef:
+	make re
+	$(CC) -o undef main.c print_status.c $(NAME)
 	make clean
 
 clean:
