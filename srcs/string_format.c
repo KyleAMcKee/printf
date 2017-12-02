@@ -6,15 +6,34 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:16:39 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/30 23:02:31 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/01 18:01:17 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+int	left_justify(t_type type, int length)
+{
+	int	total;
+	int	i;
+
+	i = 0;
+	total = 0;
+	if (length > type.w_precision)
+		total += length;
+	else
+		total += type.w_precision;
+	while (total < type.width)
+	{
+		ft_putchar(' ');
+		i++;
+		total++;
+	}
+	return (i);
+}
+
 int	string_format(t_type type, va_list ap)
 {
-//	char	*str;
 	int		len;
 	int		total;
 	int 	i;
@@ -44,6 +63,7 @@ int	string_format(t_type type, va_list ap)
 			i++;
 		}
 		total += i;
+		len = i;
 	}
 	else
 	{
@@ -51,7 +71,7 @@ int	string_format(t_type type, va_list ap)
 		total += len;
 	}
 	if (type.flags.left == 1 && type.width > len)
-		total += width_format(type, type.width - len + (len ? type.w_precision : 0), len);
+		 total += left_justify(type, len);
 	//print_status(type);
 	return (total);
 }
