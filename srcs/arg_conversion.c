@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 22:51:16 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/01 20:05:22 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/01 20:54:43 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_type	u_arg_conversion(t_type type, va_list ap)
 		type.result.u_num_jug = va_arg(ap, uintmax_t);
 	else if (type.type == 'C')
 		type.result.chr = va_arg(ap, wchar_t);
+	else if (type.type == 'S')
+		type.result.wstr = va_arg(ap, wchar_t*);
 	else
 		type.result.u_num_jug = va_arg(ap, unsigned int);
 	return (type);
