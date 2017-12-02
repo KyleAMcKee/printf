@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/01 18:23:29 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/01 18:46:49 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ int	int_format(t_type type, va_list ap)
 	i = total;
 	if (type.flags.precision && type.w_precision <= i)
 		type.flags.zero = 0;
+	if (type.w_precision > type.width)
+	{
+		type.width = 0;
+		//type.flags.left = 0;
+		//type.flags.right = 0;
+	}
 	i += prepend_space(type, total);
 	i += prepend_zero(type, total);
 	if (!type.width && !type.w_precision)
