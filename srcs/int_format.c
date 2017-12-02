@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/01 17:42:11 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/01 18:23:29 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	int_format(t_type type, va_list ap)
 	type = arg_conversion(type, ap);
 	total = num_len(type.result.num_jug);
 	i = total;
+	if (type.flags.precision && type.w_precision <= i)
+		type.flags.zero = 0;
 	i += prepend_space(type, total);
 	i += prepend_zero(type, total);
 	if (!type.width && !type.w_precision)
@@ -48,5 +50,6 @@ int	int_format(t_type type, va_list ap)
 	print_max(type.result.num_jug);
 	if (type.flags.left == 1)
 		i += right_justify(type, total);
+	//print_status(type);
 	return (i);
 }
