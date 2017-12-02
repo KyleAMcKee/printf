@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/30 23:59:28 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/01 20:18:10 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef union
 {
 	wchar_t			chr;
 	char			*str;
+	wchar_t			*wstr;
 	intmax_t		num_jug;
 	uintmax_t		u_num_jug;
 }					arg_res;
@@ -76,6 +77,8 @@ int 	octal_format(t_type type, va_list ap);
 int 	unsigned_format(t_type type, va_list ap);
 int 	percent_format(t_type type);
 int		pointer_format(t_type type, va_list ap);
+int		wchar_format(t_type type, va_list ap);
+int		wchar_string_format(t_type type, va_list ap);
 int		width_format(t_type type, int amount, int digits);
 int		width_format_after(t_type type, int amount);
 int		display_sign(t_type type);
