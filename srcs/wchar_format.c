@@ -6,67 +6,76 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:16:51 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/01 21:06:32 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/02 19:55:19 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-void	wchar_convert(wchar_t c)
+
+int	wchar_convert(uintmax_t c)
 {
 	char *str;
+	int i;
 
-	str = NULL;
+	i = 0;
+	str = ft_strnew(4);
 	if (c <= 0x80)
 	{
-		str = ft_strnew(1);
+		i++;
 		str[0] = c;
 	}
 	else if (c <= 0x7FF)
 	{
-		str = ft_strnew(2);
 		str[0] = (c >> 6) | 0xC0;
 		str[1] = (c & 0x3F) | 0x80;
+		i += 2;
 	}
 	else if (c <= 0xFFFF)
 	{
 		
-		str = ft_strnew(3);
-		str[0] = c >> 12 | 0xE0;
-		str[1] = (c >> 6 & 0x3F) | 0x80;
+		str[0] = (c >> 12) | 0xE0;
+		str[1] = ((c >> 6) & 0x3F) | 0x80;
 		str[2] = (c & 0x3F) | 0x80;
+		i += 3;
 	}
 	else if (c <= 0x10FFFF)
 	{
-		str = ft_strnew(4);
-		str[0] = c >> 18 | 0xF0;
-		str[1] = (c >> 12 & 0x3F) | 0x80;
-		str[2] = (c >> 6 & 0x3F) | 0x80;
+		str[0] = (c >> 18) | 0xF0;
+		str[1] = ((c >> 12) & 0x3F) | 0x80;
+		str[2] = ((c >> 6) & 0x3F) | 0x80;
 		str[3] = (c & 0x3F) | 0x80;
+		i += 4;
 	}
 	ft_putstr(str);
 	free(str);
+	return (i);
 }
 
 int		wchar_format(t_type type, va_list ap)
 {
+	int i;
+
+	i = 0;
 	type = u_arg_conversion(type, ap);
-	wchar_convert(type.result.chr);
+//	i = wchar_convert(type.result.chr);
+	ft_putchar(type.result.chr);
 	return (1);
 }
 
 int		wchar_string_format(t_type type, va_list ap)
 {
 	int i;
+	int j;
 
 	i = 0;
-	type = u_arg_conversion(type, ap);
-	while (type.result.wstr[i])
+	j = 0;
+	type = char_conversion(type, ap);
+	if (!type.result.wstr)
 	{
-		if (type.result.wstr[i] >> 8)
-			wchar_convert(type.result.wstr[i]);
-		else
-			ft_putchar(type.result.wstr[i]);
-		i++;	
+		ft_putstr("(null)");
+		return(6);
 	}
-	return (i);
+	while (type.result.wstr[i])
+		j += wchar_convert(type.result.wstr[i++]);
+	return (j);
 }
