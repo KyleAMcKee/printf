@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 14:50:43 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 15:11:42 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_type	set_flags(t_type type, int len)
 //		type.flags.zero = 0;
 	type.width -= len;
 	if (type.flags.left == 1)
-	{
 		type.flags.right = 0;
-		type.flags.zero = 0;
-	}
 	if (type.flags.zero == 1)
 		type.flags.right = 0;
 	if (type.w_precision > type.width)
@@ -33,6 +30,8 @@ t_type	set_flags(t_type type, int len)
 	else
 		type.w_precision = 0;
 	type.width -= type.w_precision;
+	if (len > type.w_precision && type.flags.zero && type.flags.precision)
+		type.flags.right = 1;
 	return (type);
 }
 
