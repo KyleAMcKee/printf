@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:22:26 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/30 20:20:13 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 14:43:46 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,15 @@ int	right_justify(t_type type, int digits)
 
 	i = 0;
 	total = 0;
-	if (type.result.num_jug >= 0)
-		total = type.flags.plus;
-	if (digits < type.w_precision)
-		total += type.w_precision;
-	else
-		total += digits;
-	if (type.result.num_jug < 0)
-		total++;
+	digits++;
+	//if (type.result.num_jug >= 0)
+	//	total = type.flags.plus;
+	//if (digits < type.w_precision)
+	//	total += type.w_precision;
+	//else
+	//	total += digits;
+	//if (type.result.num_jug < 0)
+	//	total++;
 	while (total < type.width)
 	{
 		ft_putchar(' ');
@@ -104,20 +105,43 @@ int	right_justify(t_type type, int digits)
 	return (i);
 }
 
+int	print_zeros(t_type type, int digits)
+{
+	int i;
+
+	i = 0;
+	digits++;
+	if (!type.flags.right && !type.flags.left)
+	{
+		while (type.width > i)
+		{
+			ft_putchar('0');
+			i++;
+		}
+	}
+	while (type.w_precision > i)
+	{
+		ft_putchar('0');
+		i++;
+	}
+	return (i);
+}
+
 int	prepend_zero(t_type type, int digits)
 {
 	int i;
 
 	i = 0;
-	if ((type.width || type.w_precision) && type.flags.zero)
+	if (type.w_precision || type.flags.zero)
 	{
-		if (type.w_precision && type.width > type.w_precision && !type.flags.left)
-			i += right_justify(type, digits);
-		if ((i += display_sign(type)))
-			digits++;
-		if (digits < type.width || digits < type.w_precision)
+		//if (type.w_precision && type.width > type.w_precision && !type.flags.left)
+		//	i += right_justify(type, digits);
+	//	if ((i += display_sign(type)))
+	//		digits++;
+		if (type.width || type.flags.zero == 1)
 		{
-			if (digits < type.width)
+			i += print_zeros(type, digits);
+		/*	if (digits < type.width)
 			{
 				while (type.width-- > digits)
 				{
@@ -131,6 +155,7 @@ int	prepend_zero(t_type type, int digits)
 					ft_putchar('0');
 					i++;
 				}
+		}*/
 		}
 	}
 	return (i);
@@ -143,20 +168,23 @@ int	prepend_space(t_type type, int digits)
 	i = 0;
 	if (type.w_precision == 0 && type.flags.precision == 1)
 		digits--;
-	if ((type.width || type.w_precision) && !type.flags.zero)
+	if (type.flags.right == 1)
+		i += right_justify(type, digits);
+	/*if ((type.width || type.w_precision) && !type.flags.zero)
 	{
 		if (type.width > type.w_precision && !type.flags.left)
 			i += right_justify(type, digits);
 		i += display_sign(type);
-		if (type.width < type.w_precision || digits < type.w_precision)
+	if (type.width < type.w_precision || digits < type.w_precision)
 		{
+			i += print_zeros(type, digits);
 			while (type.w_precision-- > digits)
 			{
 				ft_putchar('0');
 				i++;
 			}
 		}
-	}
+	}*/
 	return (i);
 }
 
