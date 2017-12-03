@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:16:51 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/02 19:55:19 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 12:26:48 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ int		wchar_format(t_type type, va_list ap)
 
 	i = 0;
 	type = u_arg_conversion(type, ap);
-//	i = wchar_convert(type.result.chr);
-	ft_putchar(type.result.chr);
-	return (1);
+	i = wchar_convert(type.result.chr);
+	return (i);
 }
 
 int		wchar_string_format(t_type type, va_list ap)
