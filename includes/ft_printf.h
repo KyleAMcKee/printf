@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/01 20:18:10 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/01 22:42:15 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_type	check_flags(const char *str, t_type type, int *i);
 t_type	check_length(const char *str, t_type type, int *i);
 t_type	u_arg_conversion(t_type type, va_list ap);
 t_type	arg_conversion(t_type type, va_list ap);
+t_type	char_conversion(t_type type, va_list ap);
 int		ft_printf(const char *restrict format, ...);
 int		type_handler(t_type type, va_list list);
 int 	char_format(t_type type, va_list ap);
