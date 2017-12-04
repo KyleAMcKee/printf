@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 13:30:27 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 23:10:59 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 11:19:45 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int			display_zero(t_type type)
 	int i;
 
 	i = 0;
-	if (type.flags.hash == 1)
+	if (type.flags.hash == 1 && (type.result.u_num_jug != 0 || type.flags.precision ==1))
 	{
 		ft_putchar('0');
 		i++;
