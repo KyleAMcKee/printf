@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:16:51 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 15:20:20 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 15:33:07 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	wchar_convert(uintmax_t c)
 		i += 4;
 	}
 	ft_putstr(str);
-	ft_putchar('*');
 	free(str);
 	return (i);
 }
@@ -69,7 +68,6 @@ int		wchar_string_format(t_type type, va_list ap)
 
 	i = 0;
 	j = 0;
-	ft_putchar('!');
 	type = char_conversion(type, ap);
 	if (!type.result.wstr)
 	{
