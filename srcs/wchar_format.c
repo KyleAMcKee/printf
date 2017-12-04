@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:16:51 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 15:12:44 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 15:20:20 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		wchar_string_format(t_type type, va_list ap)
 
 	i = 0;
 	j = 0;
+	ft_putchar('!');
 	type = char_conversion(type, ap);
 	if (!type.result.wstr)
 	{
