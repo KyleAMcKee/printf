@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 12:57:31 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 12:58:34 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	display_sign(t_type type)
 		{
 			if (!type.flags.right)
 			{
-				ft_putchar('*');
+				ft_putchar(' ');
 				i++;
 			}
 		}
