@@ -6,7 +6,7 @@
 #    By: kmckee <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 10:55:28 by kmckee            #+#    #+#              #
-#    Updated: 2017/12/03 17:55:49 by kmckee           ###   ########.fr        #
+#    Updated: 2017/12/03 21:31:36 by kmckee           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,7 +20,7 @@ FLAGS		=	-Wall -Werror -Wextra
 
 SOURCES		=	ft_printf.c \
 				check_flags.c check_length.c \
-				type_handler.c \
+				type_handler.c check_width.c\
 				arg_conversion.c \
 				char_format.c string_format.c \
 				int_format.c hex_format.c \
@@ -50,6 +50,7 @@ test:
 	make re
 	$(CC) $(FLAGS) -o test main.c print_status.c $(NAME)
 	make clean
+	./test
 
 undef:
 	make re
