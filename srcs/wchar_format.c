@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:16:51 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 12:47:52 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 15:12:44 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	wchar_convert(uintmax_t c)
 		i += 4;
 	}
 	ft_putstr(str);
+	ft_putchar('*');
 	free(str);
 	return (i);
 }
