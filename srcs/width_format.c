@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:22:26 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 11:47:41 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 12:01:52 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int	prepend_space(t_type type, int digits)
 	int i;
 
 	i = 0;
-	if (type.flags.right == 1)
+	if (type.flags.right == 1 )
 		i += justify(type, digits);
 	return (i);
 }
