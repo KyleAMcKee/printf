@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:22:26 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 14:23:12 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 14:35:38 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	justify(t_type type, int digits)
 	digits++;
 	while (total < type.width)
 	{
-		ft_putchar('$');
+//		ft_putchar('$');
 		i++;
 		total++;
 	}
