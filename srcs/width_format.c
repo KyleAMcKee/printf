@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:22:26 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 19:33:26 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 20:17:03 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	display_sign(t_type type)
 	return (i);
 }
 
-int	right_justify(t_type type, int digits)
+int	justify(t_type type, int digits)
 {
 	int total;
 	int i;
@@ -139,10 +139,8 @@ int	prepend_space(t_type type, int digits)
 	int i;
 
 	i = 0;
-	if (type.w_precision == 0 && type.flags.precision == 1)
-		digits--;
 	if (type.flags.right == 1)
-		i += right_justify(type, digits);
+		i += justify(type, digits);
 	return (i);
 }
 
