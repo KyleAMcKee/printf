@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:02:32 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 15:17:52 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 15:21:50 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	type_handler(t_type type, va_list ap)
 {
+	ft_putchar('#');
 	if (type.type == '%')
 		return (percent_format(type));
 	if (type.type == 'c' && type.length.l != 1)
@@ -37,6 +38,5 @@ int	type_handler(t_type type, va_list ap)
 		return (unsigned_format(type, ap));
 	if (type.type == 'p')
 		return (pointer_format(type, ap));
-	ft_putchar('#');
 	return (0);
 }
