@@ -6,43 +6,45 @@
 #    By: kmckee <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 10:55:28 by kmckee            #+#    #+#              #
-#    Updated: 2017/12/01 20:38:16 by kmckee           ###   ########.fr        #
+#    Updated: 2017/12/03 17:55:49 by kmckee           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME		=	libftprintf.a
-SRC			=	srcs/
-INC			= 	includes/
-FILES		=	ft_printf \
-				check_flags check_length \
-				type_handler \
-				arg_conversion \
-				char_format string_format \
-				int_format hex_format \
-				octal_format unsigned_format \
-				percent_format width_format \
-				pointer_format wchar_format \
-				print_max \
-
-SRC_FILES	= 	$(addprefix $(SRC), $(FILES))
-C_FILES 	= 	$(addsuffix .c, $(SRC_FILES))
-O_FILES		= 	$(addsuffix .o, $(SRC_FILES))
-
+SRCDIR		=	srcs/
+INCDIR		= 	includes/
+OBJDIR		=	temp/
+LIBFT		=	libft/
 CC			=	gcc
 FLAGS		=	-Wall -Werror -Wextra
-LIBFT		=	libft/libft.a
+
+SOURCES		=	ft_printf.c \
+				check_flags.c check_length.c \
+				type_handler.c \
+				arg_conversion.c \
+				char_format.c string_format.c \
+				int_format.c hex_format.c \
+				octal_format.c unsigned_format.c \
+				percent_format.c width_format.c \
+				pointer_format.c wchar_format.c \
+				print_max.c
+
+SRCS		=	$(addprefix $(SRCDIR), $(SOURCES))
+OBJS		=	$(addprefix $(OBJDIR), $(SOURCES:.c=.o))
 
 all: $(NAME)
 
-$(NAME):
-	make all -C libft
-	$(CC) $(FLAGS) -c $(C_FILES) -I $(INC)
-	mv *.o srcs/
-	ar rcs $(NAME) $(O_FILES)
-	rm srcs/*.o
-	ar -x $(LIBFT)
-	ar -x $(NAME)
-	ar rcs $(NAME) *.o
+$(NAME): $(OBJS)
+	@echo "\x1b[31mCreating Library...\x1b[0m"
+	@make -C $(LIBFT)
+	@cp libft/libft.a ./$(NAME)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
+	@echo "\x1b[32mDone\x1b[0m"
+
+$(OBJDIR)%.o: $(SRCDIR)%.c
+	@mkdir -p temp
+	$(CC) $(FLAGS) -I $(INCDIR) -c -o $@ $<
 
 test:
 	make re
@@ -55,12 +57,13 @@ undef:
 	make clean
 
 clean:
-	make clean -C libft
-	rm *.o
-	rm _*
+	@echo "\x1b[31mRemoving object files...\x1b[0m"
+	@rm -f $(OBJS)
+	@make clean -C $(LIBFT)
+	@echo "\x1b[32mDone\x1b[0m"
 
-fclean:
-	make fclean -C libft
-	rm -f $(NAME)
+fclean: clean
+	@rm -f $(NAME)
+	@make fclean -C $(LIBFT)
 
 re: fclean all
