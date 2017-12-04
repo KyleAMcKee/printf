@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 15:11:42 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 19:44:45 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_type	set_flags(t_type type, int len)
 {
-//	if (type.flags.precision && type.w_precision <= len)
-//		type.flags.zero = 0;
+	//if (type.flags.precision && type.w_precision > len)
+	//	type.flags.zero = 0;
 	type.width -= len;
 	if (type.flags.left == 1)
 		type.flags.right = 0;
@@ -30,7 +30,7 @@ t_type	set_flags(t_type type, int len)
 	else
 		type.w_precision = 0;
 	type.width -= type.w_precision;
-	if (len > type.w_precision && type.flags.zero && type.flags.precision)
+	if (len >= type.w_precision && type.flags.zero && type.flags.precision)
 		type.flags.right = 1;
 	return (type);
 }
@@ -65,9 +65,7 @@ int	int_format(t_type type, va_list ap)
 	total += prepend_space(type, digits);
 	total += display_sign(type);
 	total += prepend_zero(type, digits);
-//	print_status(type);
-//	if (!type.width && !type.w_precision)
-//		i += display_sign(type);
+	//print_status(type);
 	if (type.flags.precision == 1 && type.w_precision == 0 && type.result.num_jug == 0)
 		return (type.width > 0 ? total - 1 : 0);
 	print_max(type.result.num_jug);

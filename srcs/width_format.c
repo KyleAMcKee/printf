@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:22:26 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 14:43:46 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 19:33:26 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,6 @@ int	right_justify(t_type type, int digits)
 	i = 0;
 	total = 0;
 	digits++;
-	//if (type.result.num_jug >= 0)
-	//	total = type.flags.plus;
-	//if (digits < type.w_precision)
-	//	total += type.w_precision;
-	//else
-	//	total += digits;
-	//if (type.result.num_jug < 0)
-	//	total++;
 	while (total < type.width)
 	{
 		ft_putchar(' ');
@@ -134,28 +126,9 @@ int	prepend_zero(t_type type, int digits)
 	i = 0;
 	if (type.w_precision || type.flags.zero)
 	{
-		//if (type.w_precision && type.width > type.w_precision && !type.flags.left)
-		//	i += right_justify(type, digits);
-	//	if ((i += display_sign(type)))
-	//		digits++;
 		if (type.width || type.flags.zero == 1)
 		{
 			i += print_zeros(type, digits);
-		/*	if (digits < type.width)
-			{
-				while (type.width-- > digits)
-				{
-					ft_putchar('0');
-					i++;
-				}
-			}
-			else
-				while (type.w_precision-- > digits)
-				{
-					ft_putchar('0');
-					i++;
-				}
-		}*/
 		}
 	}
 	return (i);
@@ -170,21 +143,6 @@ int	prepend_space(t_type type, int digits)
 		digits--;
 	if (type.flags.right == 1)
 		i += right_justify(type, digits);
-	/*if ((type.width || type.w_precision) && !type.flags.zero)
-	{
-		if (type.width > type.w_precision && !type.flags.left)
-			i += right_justify(type, digits);
-		i += display_sign(type);
-	if (type.width < type.w_precision || digits < type.w_precision)
-		{
-			i += print_zeros(type, digits);
-			while (type.w_precision-- > digits)
-			{
-				ft_putchar('0');
-				i++;
-			}
-		}
-	}*/
 	return (i);
 }
 
