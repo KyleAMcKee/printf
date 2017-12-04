@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:02:32 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 12:34:45 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 23:16:25 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,10 @@ int	type_handler(t_type type, va_list ap)
 		return (wchar_format(type, ap));
 	if (type.type == 's')
 		return (string_format(type, ap));
-	if	(type.type == 'S')
+	if (type.type == 'S')
 		return (wchar_string_format(type, ap));
 	if (type.type == 'i' || type.type == 'd')
 		return (int_format(type, ap));
-	if (type.type == 'D')
-	{
-		type.length.l = 1;
-		return (int_format(type, ap));
-	}
 	if (type.type == 'x' || type.type == 'X')
 		return (hex_format(type, ap));
 	if (type.type == 'o' || type.type == 'O')

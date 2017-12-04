@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 22:51:16 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/02 00:26:33 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 23:14:30 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@ t_type	char_conversion(t_type type, va_list ap)
 
 t_type	u_arg_conversion(t_type type, va_list ap)
 {
-
-	//if (type.type >= 65 && type.type <= 90)
-	//	type.length.l = 1;
-	if (type.length.l == 1 || type.type == 'p' || type.type == 'U' || type.type == 'O')
+	if (type.type == 'p' || type.type == 'U' || type.type == 'O')
+		type.result.u_num_jug = va_arg(ap, unsigned long);
+	else if (type.length.l == 1)
 		type.result.u_num_jug = va_arg(ap, unsigned long);
 	else if (type.length.ll == 1)
 		type.result.u_num_jug = va_arg(ap, unsigned long long);
-	else if(type.length.h == 1)
+	else if (type.length.h == 1)
 		type.result.u_num_jug = (unsigned short)va_arg(ap, unsigned int);
 	else if (type.length.hh == 1)
 		type.result.u_num_jug = (unsigned char)va_arg(ap, unsigned int);
@@ -45,12 +44,11 @@ t_type	u_arg_conversion(t_type type, va_list ap)
 
 t_type	arg_conversion(t_type type, va_list ap)
 {
-
-	if (type.length.l == 1)
+	if (type.length.l == 1 || type.type == 'D')
 		type.result.u_num_jug = va_arg(ap, long);
 	else if (type.length.ll == 1)
 		type.result.u_num_jug = va_arg(ap, long long);
-	else if(type.length.h == 1)
+	else if (type.length.h == 1)
 		type.result.u_num_jug = (short)va_arg(ap, int);
 	else if (type.length.hh == 1)
 		type.result.u_num_jug = (char)va_arg(ap, int);

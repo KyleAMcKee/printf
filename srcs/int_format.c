@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 20:11:36 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 22:22:39 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	int_format(t_type type, va_list ap)
 	if (type.flags.precision == 1 && type.w_precision == 0 && type.result.num_jug == 0)
 	{	
 		type.width > 0 ? ft_putchar(' ') : 0;
-		return(type.width > 0 ? total : 0);
+		return (type.width > 0 ? total : 0);
 	}
 	print_max(type.result.num_jug);
 	if (type.flags.left == 1)

@@ -6,16 +6,48 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 13:30:27 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/29 14:36:53 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 23:10:59 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int octal_recursion(uintmax_t val)
+t_type		set_flags_octal(t_type type, int len)
 {
-	char oct[9];
-	static int i;
+	type.width -= len;
+	if (type.flags.left == 1)
+		type.flags.right = 0;
+	if (type.flags.zero == 1)
+		type.flags.right = 0;
+	if (type.w_precision > type.width)
+		type.width = 0;
+	if (type.flags.hash == 1)
+		type.width--;
+	if (type.w_precision > len)
+		type.w_precision -= len;
+	else
+		type.w_precision = 0;
+	type.width -= type.w_precision;
+	return (type);
+}
+
+int			display_zero(t_type type)
+{
+	int i;
+
+	i = 0;
+	if (type.flags.hash == 1)
+	{
+		ft_putchar('0');
+		i++;
+	}
+	return (i);
+}
+
+int			octal_recursion(uintmax_t val)
+{
+	char		oct[9];
+	static int	i;
 
 	i = 0;
 	ft_strcpy(oct, OCT);
@@ -30,55 +62,37 @@ int octal_recursion(uintmax_t val)
 	return (i);
 }
 
-int octal_format(t_type type, va_list ap)
+int			octal_length(uintmax_t val)
 {
-	uintmax_t temp;
-	int digits;	
 	int i;
-	int adjust;
+
+	i = 0;
+	while (val)
+	{
+		val /= 10;
+		i++;
+	}
+	return (i);
+}
+
+int			octal_format(t_type type, va_list ap)
+{
+	int digits;
+	int i;
 
 	type = u_arg_conversion(type, ap);
-	temp = type.result.u_num_jug;
-	digits = 0;
+	digits = octal_length(type.result.u_num_jug);
 	i = 0;
-	adjust = 0;
-	if (type.flags.precision == 1 && type.result.u_num_jug == 0)
-	{
-		if (type.flags.hash == 1)
-		{
-			ft_putchar('0');
-			i++;
-		}
-		while (i < type.width)
-		{
-			ft_putchar(' ');
-			i++;
-		}
+	type = set_flags_octal(type, digits);
+	i += prepend_space(type, digits);
+	i += prepend_zero(type, digits);
+	i += display_zero(type);
+	if (type.flags.precision == 1 && type.w_precision == 0 && type.result.u_num_jug == 0)
 		return (i);
-	}
-	while (temp /= 10)
-		digits++;
-	digits = digits + type.flags.hash;
-	if (type.flags.right == 1 && type.width > digits)
-		i += width_format(type, type.width - digits - 1, digits);
-	if (type.flags.hash == 1 )//&& type.result.u_num_jug > 0)
-	{
-		ft_putchar('0');
-		i++;
-		if (type.result.u_num_jug == 0)
-			return (i);
-	}
-	if (type.w_precision > digits && type.flags.precision == 1 && type.result.u_num_jug >0)
-	{
-		adjust = width_format(type, type.w_precision - digits - 1, digits);
-		i += adjust;
-	}
-	if (type.width > digits && type.flags.zero == 1)
-		i += width_format(type, type.width - digits - 1, digits);
 	i += octal_recursion(type.result.u_num_jug);
 	if (type.result.u_num_jug == 0)
 		ft_putchar('0');
-	if (type.flags.left == 1 && type.width > i)
-		i += width_format_after(type, type.width - digits - 1 - adjust);
-	return(i);
+	if (type.flags.left == 1)
+		i += justify(type, i);
+	return (i);
 }

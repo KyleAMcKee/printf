@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 20:12:38 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/03 21:35:14 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ typedef struct		s_flags
 	int		percent;
 }
 					t_flags;
+
+typedef	struct		s_pos
+{
+	int		i;
+	int		start;
+}
+					t_pos;
 
 typedef struct		s_length
 {
@@ -68,6 +75,9 @@ t_type	check_length(const char *str, t_type type, int *i);
 t_type	u_arg_conversion(t_type type, va_list ap);
 t_type	arg_conversion(t_type type, va_list ap);
 t_type	char_conversion(t_type type, va_list ap);
+t_type	check_width(const char *str, t_type type, int *i);
+int		check_conv(char c, t_type type);
+int		is_flag(char c);
 int		ft_printf(const char *restrict format, ...);
 int		type_handler(t_type type, va_list list);
 int 	char_format(t_type type, va_list ap);
