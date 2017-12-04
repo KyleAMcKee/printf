@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 14:19:22 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 14:21:09 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_type	set_flags(t_type type, int len)
 		type.w_precision = 0;
 //	if (len >= type.w_precision && type.flags.zero && type.flags.precision)
 //		type.flags.right = 1;
+	type.flags.right = 0;
 	return (type);
 }
 
