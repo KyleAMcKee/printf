@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 12:55:57 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 12:56:48 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	int_format(t_type type, va_list ap)
 	type = arg_conversion(type, ap);
 	digits = num_len(type.result.num_jug);
 	total = digits;
-	print_status(type);
+	//print_status(type);
 	type = set_flags(type, digits);
 	print_status(type);
 	total += prepend_space(type, digits);
