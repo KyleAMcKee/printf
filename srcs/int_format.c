@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 22:22:39 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 11:46:09 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_type	set_flags(t_type type, int len)
 	if (type.flags.left == 1)
 		type.flags.right = 0;
 	if (type.flags.zero == 1)
+		type.flags.right = 0;
+	if (type.w_precision > type.width)
 		type.flags.right = 0;
 	if (type.w_precision > type.width)
 		type.width = 0;
@@ -58,6 +60,7 @@ int	int_format(t_type type, va_list ap)
 	type = arg_conversion(type, ap);
 	digits = num_len(type.result.num_jug);
 	total = digits;
+//	print_status(type);
 	type = set_flags(type, digits);
 	total += prepend_space(type, digits);
 	total += display_sign(type);

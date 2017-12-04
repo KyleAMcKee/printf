@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:22:26 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 20:17:03 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 11:47:41 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	display_sign(t_type type)
 		}
 		else if (type.flags.space == 1 && type.result.num_jug >= 0)
 		{
-			if (!type.width)
+			if (!type.flags.right)
 			{
 				ft_putchar(' ');
 				i++;
