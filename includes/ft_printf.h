@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 12:27:34 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 12:36:06 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef union
 {
 	wchar_t			chr;
 	char			*str;
-	wchar_t			*wstr;
+	char			*wstr;
 	intmax_t		num_jug;
 	uintmax_t		u_num_jug;
 }					arg_res;
