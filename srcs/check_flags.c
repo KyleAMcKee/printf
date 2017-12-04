@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:32:55 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 21:54:33 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 14:32:50 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ t_type	check_flags(const char *str, t_type type, int *i)
 	}
 	if (type.flags.zero > 1)
 	{
+		ft_putchar('^'); /* DELETE */
 		type.flags.zero = 0;
 		type.flags.right = 1;
 	}
