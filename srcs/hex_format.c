@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:24:23 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 20:41:57 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 12:29:20 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,14 @@ int	hex_format(t_type type, va_list ap)
 		digits++;
 	digits = digits + (type.flags.hash * 2);
 	if (type.flags.right == 1 && type.width > digits)
-		i += width_format(type, type.width - digits - 1, digits);
+		i += width_format(type, type.width - digits - 1);
 	i += display_x(type);
 	if (type.result.u_num_jug == 0)
 		ft_putchar('0');
 	if (type.width > digits && type.flags.zero == 1)
-		i += width_format(type, type.width - digits - 1, digits);
+		i += width_format(type, type.width - digits - 1);
 	i += hex_recursion(type.result.u_num_jug, type);
 	if (type.flags.left == 1 && type.width > i)
-		i += width_format(type, type.width - i, digits);
+		i += width_format(type, type.width - i);
 	return (i);
 }

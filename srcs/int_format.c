@@ -6,15 +6,43 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 11:59:48 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 12:07:41 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+int	display_sign(t_type type)
+{
+	int i;
+
+	i = 0;
+	if (type.flags.plus == 1 || type.result.num_jug < 0 || type.flags.space == 1)
+	{
+		if (type.flags.plus == 1 && type.result.num_jug >= 0)
+		{
+			ft_putchar('+');
+			i++;
+		}
+		else if (type.flags.space == 1 && type.result.num_jug >= 0)
+		{
+			if (!type.flags.right)
+			{
+				ft_putchar(' ');
+				i++;
+			}
+		}
+		else
+		{
+			ft_putchar('-');
+			i++;
+		}
+	}
+	return (i);
+}
+
 t_type	set_flags(t_type type, int len)
 {
-	//type.width -= len;
 	if (type.flags.left == 1)
 		type.flags.right = 0;
 	if (type.flags.zero == 1)
@@ -33,7 +61,6 @@ t_type	set_flags(t_type type, int len)
 		type.w_precision -= len;
 	else
 		type.w_precision = 0;
-	//type.width -= type.w_precision;
 	if (len >= type.w_precision && type.flags.zero && type.flags.precision)
 		type.flags.right = 1;
 	return (type);
@@ -64,9 +91,7 @@ int	int_format(t_type type, va_list ap)
 	type = arg_conversion(type, ap);
 	digits = num_len(type.result.num_jug);
 	total = digits;
-	//print_status(type);
 	type = set_flags(type, digits);
-	//print_status(type);
 	total += prepend_space(type, digits);
 	total += display_sign(type);
 	total += prepend_zero(type, digits);

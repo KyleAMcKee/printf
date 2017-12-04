@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:16:39 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/01 19:35:06 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 12:28:34 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ int	string_format(t_type type, va_list ap)
 	len = (int)ft_strlen(type.result.str);
 	total += string_zero_pad(type, len);
 	if (type.flags.right == 1 && type.width > len)
-		total = width_format(type, type.width - len + (len ? type.w_precision : 0), len);
+		total = width_format(type, type.width - len + (len ? type.w_precision : 0));
 	if (ft_strequ(type.result.str, ""))
 	{
 		if (type.flags.left == 1)
-			total = width_format(type, type.width, len);
+			total = width_format(type, type.width);
 			return (total);
 	}
 	if (type.flags.precision == 1)

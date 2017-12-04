@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unsigned_format.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 13:53:09 by kmckee            #+#    #+#             */
-/*   Updated: 2017/11/30 14:35:08 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 12:30:01 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	unsigned_recursion(uintmax_t val)
 {
-	char dec[11];
-	static int i;
+	char		dec[11];
+	static int	i;
 
 	i = 0;
 	ft_strcpy(dec, DEC);
@@ -28,6 +28,40 @@ int	unsigned_recursion(uintmax_t val)
 		i++;
 	}
 	return (i);
+}
+
+int	width_format(t_type type, int amount)
+{
+	int ret;
+
+	ret = 0;
+	while (amount)
+	{
+		if (type.flags.zero == 1)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
+		amount--;
+		ret++;
+	}
+	return (ret);
+}
+
+int	width_format_after(t_type type, int amount)
+{
+	int ret;
+
+	ret = 0;
+	if (type.flags.left == 1)
+	{
+		while (amount)
+		{
+			ft_putchar(' ');
+			amount--;
+			ret++;
+		}
+	}
+	return (ret);
 }
 
 int	prepend_zeros(t_type type, int digits)
@@ -45,18 +79,18 @@ int	prepend_zeros(t_type type, int digits)
 
 int	unsigned_format(t_type type, va_list ap)
 {
-	int i;
-	int digits;
-	uintmax_t temp;
+	int			i;
+	int			digits;
+	uintmax_t	temp;
 
 	type = u_arg_conversion(type, ap);
 	i = 0;
 	digits = 0;
 	temp = type.result.u_num_jug;
-	while(temp /= 10)
+	while (temp /= 10)
 		digits++;
 	if (type.width > digits && type.flags.left != 1)
-		i += width_format(type, type.width - digits - 1, digits);
+		i += width_format(type, type.width - digits - 1);
 	if (type.w_precision > digits)
 		i += prepend_zeros(type, digits);
 	if (type.result.u_num_jug == 0)
@@ -64,6 +98,5 @@ int	unsigned_format(t_type type, va_list ap)
 	i += unsigned_recursion(type.result.u_num_jug);
 	if (type.flags.left == 1)
 		i += width_format_after(type, type.width - i);
-	//print_status(type);
 	return (i);
 }
