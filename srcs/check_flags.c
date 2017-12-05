@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:32:55 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 16:30:51 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 21:57:42 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ t_type	check_flags(const char *str, t_type type, int *i)
 	{
 		if (!is_len(type.type))
 		{
-			ft_putchar(type.type);
-			type.ret++;
+			type.ret += undef_format(type);
 		}
 	}
 	*i += 1;

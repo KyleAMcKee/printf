@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:16:39 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 20:43:19 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 20:50:22 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ int	string_zero_pad(t_type type, int length)
 
 	i = 0;
 	total = 0;
+	length++;
 	if (type.flags.right || type.flags.left)
 		return (i);
 	else
-		while (type.width > length)
+		while (type.width > 0)
 		{
 			ft_putchar('0');
 			type.width--;
@@ -82,6 +83,7 @@ int	string_format(t_type type, va_list ap)
 	total += string_zero_pad(type, len);
 	total += prepend_space(type);
 	total += print_str(type, len);
+	//print_status(type);
 	if (type.flags.left == 1)
 		 total += justify(type);
 	return (total);
