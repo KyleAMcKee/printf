@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 22:51:16 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 16:30:46 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:57:14 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_type	char_conversion(t_type type, va_list ap)
 {
-	if (type.type == 'C')
+	if (type.type == 'C' || (type.type == 'c' && type.length.l == 1))
 		type.res.chr = va_arg(ap, wchar_t);
-	else if (type.type == 'S')
+	else if (type.type == 'S' || (type.type == 's' && type.length.l == 1))
 		type.res.wstr = va_arg(ap, wchar_t*);
 	return (type);
 }
