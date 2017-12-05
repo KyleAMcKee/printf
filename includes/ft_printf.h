@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 12:40:50 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:29:21 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,15 @@ typedef union
 	wchar_t			chr;
 	char			*str;
 	wchar_t			*wstr;
-	intmax_t		num_jug;
-	uintmax_t		u_num_jug;
+	intmax_t		num;
+	uintmax_t		unum;
 }					arg_res;
 
 typedef struct		s_type
 {
 	t_flags		flags;
 	t_length	length;
-	arg_res		result;
+	arg_res		res;
 	int			width;
 	int			w_precision;
 	int			ret;
