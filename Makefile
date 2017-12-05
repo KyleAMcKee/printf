@@ -6,7 +6,7 @@
 #    By: kmckee <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 10:55:28 by kmckee            #+#    #+#              #
-#    Updated: 2017/12/04 21:19:47 by kmckee           ###   ########.fr        #
+#    Updated: 2017/12/05 15:52:10 by kmckee           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -36,7 +36,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "\x1b[31mCreating Library...\x1b[0m"
-	@make -C $(LIBFT)
+	@make re -C $(LIBFT)
 	@cp libft/libft.a ./$(NAME)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
@@ -44,7 +44,7 @@ $(NAME): $(OBJS)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	@mkdir -p temp
-	$(CC) $(FLAGS) -I $(INCDIR) -c -o $@ $<
+	@$(CC) $(FLAGS) -I $(INCDIR) -c -o $@ $<
 
 test:
 	make re
