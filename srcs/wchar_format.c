@@ -3,19 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   wchar_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:16:51 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 15:33:07 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:51:36 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	wchar_convert(uintmax_t c)
+char	*big_bytes(char *str, int c, int *i)
 {
-	char *str;
-	int i;
+	if (c <= 0xFFFF)
+	{
+		str[0] = (c >> 12) | 0xE0;
+		str[1] = ((c >> 6) & 0x3F) | 0x80;
+		str[2] = (c & 0x3F) | 0x80;
+		i += 3;
+	}
+	else if (c <= 0x10FFFF)
+	{
+		str[0] = (c >> 18) | 0xF0;
+		str[1] = ((c >> 12) & 0x3F) | 0x80;
+		str[2] = ((c >> 6) & 0x3F) | 0x80;
+		str[3] = (c & 0x3F) | 0x80;
+		i += 4;
+	}
+	return (str);
+}
+
+int		wchar_convert(int c)
+{
+	char	*str;
+	int		i;
 
 	i = 0;
 	str = ft_strnew(4);
@@ -31,21 +51,9 @@ int	wchar_convert(uintmax_t c)
 		i += 2;
 	}
 	else if (c <= 0xFFFF)
-	{
-		
-		str[0] = (c >> 12) | 0xE0;
-		str[1] = ((c >> 6) & 0x3F) | 0x80;
-		str[2] = (c & 0x3F) | 0x80;
-		i += 3;
-	}
+		str = big_bytes(str, c, &i);
 	else if (c <= 0x10FFFF)
-	{
-		str[0] = (c >> 18) | 0xF0;
-		str[1] = ((c >> 12) & 0x3F) | 0x80;
-		str[2] = ((c >> 6) & 0x3F) | 0x80;
-		str[3] = (c & 0x3F) | 0x80;
-		i += 4;
-	}
+		str = big_bytes(str, c, &i);
 	ft_putstr(str);
 	free(str);
 	return (i);
@@ -57,7 +65,7 @@ int		wchar_format(t_type type, va_list ap)
 
 	i = 0;
 	type = char_conversion(type, ap);
-	i = wchar_convert(type.result.chr);
+	i = wchar_convert(type.res.chr);
 	return (i);
 }
 
@@ -69,12 +77,15 @@ int		wchar_string_format(t_type type, va_list ap)
 	i = 0;
 	j = 0;
 	type = char_conversion(type, ap);
-	if (!type.result.wstr)
+	if (!type.res.wstr)
 	{
 		ft_putstr("(null)");
-		return(6);
+		return (6);
 	}
-	while (type.result.wstr[i])
-		j += wchar_convert(type.result.wstr[i++]);
+	while (type.res.wstr[i])
+	{
+		j += wchar_convert(type.res.wstr[i]);
+		i++;
+	}
 	return (j);
 }

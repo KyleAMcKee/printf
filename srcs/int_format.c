@@ -6,25 +6,25 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 14:35:18 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:37:53 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	display_sign(t_type type)
+int			display_sign(t_type type)
 {
 	int i;
 
 	i = 0;
-	if (type.flags.plus == 1 || type.result.num_jug < 0 || type.flags.space == 1)
+	if (type.flags.plus == 1 || type.res.num < 0 || type.flags.space == 1)
 	{
-		if (type.flags.plus == 1 && type.result.num_jug >= 0)
+		if (type.flags.plus == 1 && type.res.num >= 0)
 		{
 			ft_putchar('+');
 			i++;
 		}
-		else if (type.flags.space == 1 && type.result.num_jug >= 0)
+		else if (type.flags.space == 1 && type.res.num >= 0)
 		{
 			if (!type.flags.right)
 			{
@@ -41,7 +41,7 @@ int	display_sign(t_type type)
 	return (i);
 }
 
-t_type	set_flags(t_type type, int len)
+t_type		set_flags(t_type type, int len)
 {
 	if (type.flags.left == 1)
 		type.flags.right = 0;
@@ -51,7 +51,7 @@ t_type	set_flags(t_type type, int len)
 		type.flags.right = 0;
 	if (type.w_precision > type.width)
 		type.width = 0;
-	if (type.result.num_jug < 0 || type.flags.plus)
+	if (type.res.num < 0 || type.flags.plus)
 		type.width--;
 	if (len > type.w_precision)
 		type.width -= len;
@@ -63,13 +63,12 @@ t_type	set_flags(t_type type, int len)
 		type.w_precision = 0;
 	if (len >= type.w_precision && type.flags.zero && type.flags.precision)
 	{
-		//ft_putchar('&'); /* DELETE */
 		type.flags.right = 1;
 	}
 	return (type);
 }
 
-int	num_len(intmax_t val)
+int			num_len(intmax_t val)
 {
 	int i;
 
@@ -86,26 +85,24 @@ int	num_len(intmax_t val)
 	return (i);
 }
 
-int	int_format(t_type type, va_list ap)
+int			int_format(t_type type, va_list ap)
 {
 	int total;
 	int digits;
 
 	type = arg_conversion(type, ap);
-	digits = num_len(type.result.num_jug);
+	digits = num_len(type.res.num);
 	total = digits;
-	//print_status(type);
 	type = set_flags(type, digits);
-	//print_status(type);
 	total += prepend_space(type, digits);
 	total += display_sign(type);
 	total += prepend_zero(type, digits);
-	if (type.flags.precision == 1 && type.w_precision == 0 && type.result.num_jug == 0)
-	{	
+	if (type.flags.precision == 1 && type.w_precision == 0 && type.res.num == 0)
+	{
 		type.width > 0 ? ft_putchar(' ') : 0;
 		return (type.width > 0 ? total : 0);
 	}
-	print_max(type.result.num_jug);
+	print_max(type.res.num);
 	if (type.flags.left == 1)
 		total += justify(type, total);
 	return (total);

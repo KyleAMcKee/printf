@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 13:53:09 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 12:30:01 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:31:21 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,16 @@ int	unsigned_format(t_type type, va_list ap)
 	type = u_arg_conversion(type, ap);
 	i = 0;
 	digits = 0;
-	temp = type.result.u_num_jug;
+	temp = type.res.unum;
 	while (temp /= 10)
 		digits++;
 	if (type.width > digits && type.flags.left != 1)
 		i += width_format(type, type.width - digits - 1);
 	if (type.w_precision > digits)
 		i += prepend_zeros(type, digits);
-	if (type.result.u_num_jug == 0)
+	if (type.res.unum == 0)
 		ft_putchar('0');
-	i += unsigned_recursion(type.result.u_num_jug);
+	i += unsigned_recursion(type.res.unum);
 	if (type.flags.left == 1)
 		i += width_format_after(type, type.width - i);
 	return (i);

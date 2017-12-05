@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:02:32 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 15:31:48 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:31:19 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	type_handler(t_type type, va_list ap)
 	if (type.type == '%')
 		return (percent_format(type));
 	if (type.type == 'c' && type.length.l != 1)
-		return (char_format(type, ap)); 
+		return (char_format(type, ap));
 	if (type.type == 'C' || (type.type == 'c' && type.length.l == 1))
 		return (wchar_format(type, ap));
 	if (type.type == 'S' || (type.type == 's' && type.length.l == 1))

@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:22:26 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 14:45:11 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:31:25 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,3 @@ int	prepend_space(t_type type, int digits)
 		i += justify(type, digits);
 	return (i);
 }
-
-

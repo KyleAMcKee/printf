@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pointer_format.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:43:40 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/03 23:12:52 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:31:13 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ int	pointer_format(t_type type, va_list ap)
 
 	i = 2;
 	type = u_arg_conversion(type, ap);
-	val = type.result.u_num_jug;
+	val = type.res.unum;
 	ft_putstr("0x");
 	if (val == 0)
 		ft_putchar('0');
 	i += pointer_print(val, type);
 	return (i);
 }
-	

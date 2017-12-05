@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:24:23 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 12:29:20 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:31:03 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	display_x(t_type type)
 	int i;
 
 	i = 0;
-	if (type.flags.hash == 1 && type.result.u_num_jug > 0)
+	if (type.flags.hash == 1 && type.res.unum > 0)
 	{
 		if (type.type == 'x')
 			ft_putstr("0x");
@@ -72,10 +72,10 @@ int	hex_format(t_type type, va_list ap)
 	int			i;
 
 	type = u_arg_conversion(type, ap);
-	temp = type.result.u_num_jug;
+	temp = type.res.unum;
 	digits = 0;
 	i = 0;
-	if (type.flags.precision == 1 && type.result.u_num_jug == 0)
+	if (type.flags.precision == 1 && type.res.unum == 0)
 		return (precision_check(type));
 	while (temp /= 10)
 		digits++;
@@ -83,11 +83,11 @@ int	hex_format(t_type type, va_list ap)
 	if (type.flags.right == 1 && type.width > digits)
 		i += width_format(type, type.width - digits - 1);
 	i += display_x(type);
-	if (type.result.u_num_jug == 0)
+	if (type.res.unum == 0)
 		ft_putchar('0');
 	if (type.width > digits && type.flags.zero == 1)
 		i += width_format(type, type.width - digits - 1);
-	i += hex_recursion(type.result.u_num_jug, type);
+	i += hex_recursion(type.res.unum, type);
 	if (type.flags.left == 1 && type.width > i)
 		i += width_format(type, type.width - i);
 	return (i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   octal_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 13:30:27 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 11:19:45 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:35:05 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int			display_zero(t_type type)
 	int i;
 
 	i = 0;
-	if (type.flags.hash == 1 && (type.result.u_num_jug != 0 || type.flags.precision ==1))
+	if (type.flags.hash == 1 &&
+		(type.res.unum != 0 || type.flags.precision == 1))
 	{
 		ft_putchar('0');
 		i++;
@@ -81,16 +82,17 @@ int			octal_format(t_type type, va_list ap)
 	int i;
 
 	type = u_arg_conversion(type, ap);
-	digits = octal_length(type.result.u_num_jug);
+	digits = octal_length(type.res.unum);
 	i = 0;
 	type = set_flags_octal(type, digits);
 	i += prepend_space(type, digits);
 	i += prepend_zero(type, digits);
 	i += display_zero(type);
-	if (type.flags.precision == 1 && type.w_precision == 0 && type.result.u_num_jug == 0)
+	if (type.flags.precision == 1 &&
+		type.w_precision == 0 && type.res.unum == 0)
 		return (i);
-	i += octal_recursion(type.result.u_num_jug);
-	if (type.result.u_num_jug == 0)
+	i += octal_recursion(type.res.unum);
+	if (type.res.unum == 0)
 		ft_putchar('0');
 	if (type.flags.left == 1)
 		i += justify(type, i);
