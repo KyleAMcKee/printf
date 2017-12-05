@@ -6,7 +6,7 @@
 #    By: kmckee <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 10:55:28 by kmckee            #+#    #+#              #
-#    Updated: 2017/12/03 21:31:36 by kmckee           ###   ########.fr        #
+#    Updated: 2017/12/04 21:19:47 by kmckee           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,7 +27,7 @@ SOURCES		=	ft_printf.c \
 				octal_format.c unsigned_format.c \
 				percent_format.c width_format.c \
 				pointer_format.c wchar_format.c \
-				print_max.c
+				print_max.c undef_format.c
 
 SRCS		=	$(addprefix $(SRCDIR), $(SOURCES))
 OBJS		=	$(addprefix $(OBJDIR), $(SOURCES:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 18:55:36 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 21:20:07 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int		wchar_format(t_type type, va_list ap);
 int		wchar_string_format(t_type type, va_list ap);
 int		width_format(t_type type, int amount);
 int		width_format_after(t_type type, int amount);
+int		undef_format(t_type type);
 int		display_sign(t_type type);
 int		justify(t_type type);
 int		prepend_zero(t_type type);
