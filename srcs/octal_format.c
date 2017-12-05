@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 13:30:27 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 16:35:05 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 18:59:45 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int			octal_format(t_type type, va_list ap)
 	digits = octal_length(type.res.unum);
 	i = 0;
 	type = set_flags_octal(type, digits);
-	i += prepend_space(type, digits);
-	i += prepend_zero(type, digits);
+	i += prepend_space(type);
+	i += prepend_zero(type);
 	i += display_zero(type);
 	if (type.flags.precision == 1 &&
 		type.w_precision == 0 && type.res.unum == 0)
@@ -95,6 +95,6 @@ int			octal_format(t_type type, va_list ap)
 	if (type.res.unum == 0)
 		ft_putchar('0');
 	if (type.flags.left == 1)
-		i += justify(type, i);
+		i += justify(type);
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 13:53:09 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 16:31:21 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 19:30:41 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,73 +30,57 @@ int	unsigned_recursion(uintmax_t val)
 	return (i);
 }
 
-int	width_format(t_type type, int amount)
-{
-	int ret;
-
-	ret = 0;
-	while (amount)
-	{
-		if (type.flags.zero == 1)
-			ft_putchar('0');
-		else
-			ft_putchar(' ');
-		amount--;
-		ret++;
-	}
-	return (ret);
-}
-
-int	width_format_after(t_type type, int amount)
-{
-	int ret;
-
-	ret = 0;
-	if (type.flags.left == 1)
-	{
-		while (amount)
-		{
-			ft_putchar(' ');
-			amount--;
-			ret++;
-		}
-	}
-	return (ret);
-}
-
-int	prepend_zeros(t_type type, int digits)
+int		u_num_len(uintmax_t val)
 {
 	int i;
 
 	i = 0;
-	while (--type.w_precision > digits)
+	while (val)
 	{
-		ft_putchar('0');
+		val /= 10;
 		i++;
 	}
 	return (i);
 }
 
+t_type	set_unsigned_flags(t_type type, int len)
+{
+	if (type.flags.left == 1)
+		type.flags.right = 0;
+	if (type.flags.zero == 1)
+		type.flags.right = 0;
+	if (type.w_precision > type.width)
+		type.width = 0;
+	if (len > type.w_precision)
+		type.width -= len;
+	else
+		type.width -= type.w_precision;
+	if (type.w_precision > len)
+		type.w_precision -= len;
+	else
+		type.w_precision = 0;
+	return (type);
+}
+
 int	unsigned_format(t_type type, va_list ap)
 {
-	int			i;
+	int			total;
 	int			digits;
-	uintmax_t	temp;
+	int			ret;
 
+	total = 0;
 	type = u_arg_conversion(type, ap);
-	i = 0;
-	digits = 0;
-	temp = type.res.unum;
-	while (temp /= 10)
-		digits++;
-	if (type.width > digits && type.flags.left != 1)
-		i += width_format(type, type.width - digits - 1);
-	if (type.w_precision > digits)
-		i += prepend_zeros(type, digits);
-	if (type.res.unum == 0)
+	digits = u_num_len(type.res.num);
+	type = set_unsigned_flags(type, digits);
+	total += prepend_space(type);
+	total += prepend_zero(type);
+	if (type.flags.precision == 1 && type.w_precision == 0 && type.res.unum == 0)
+		return (total);
+	ret = unsigned_recursion(type.res.unum);
+	if (ret == 1 && type.res.unum == 0)
 		ft_putchar('0');
-	i += unsigned_recursion(type.res.unum);
+	total += ret;
 	if (type.flags.left == 1)
-		i += width_format_after(type, type.width - i);
-	return (i);
+		total += justify(type);
+	return (total);
 }

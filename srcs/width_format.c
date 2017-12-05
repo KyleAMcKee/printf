@@ -6,35 +6,30 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:22:26 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 16:31:25 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 19:01:03 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	justify(t_type type, int digits)
+int	justify(t_type type)
 {
 	int total;
-	int i;
 
-	i = 0;
 	total = 0;
-	digits++;
 	while (total < type.width)
 	{
 		ft_putchar(' ');
-		i++;
 		total++;
 	}
-	return (i);
+	return (total);
 }
 
-int	print_zeros(t_type type, int digits)
+int	print_zeros(t_type type)
 {
 	int i;
 
 	i = 0;
-	digits++;
 	if (!type.flags.right && !type.flags.left)
 	{
 		while (type.width > i)
@@ -51,7 +46,7 @@ int	print_zeros(t_type type, int digits)
 	return (i);
 }
 
-int	prepend_zero(t_type type, int digits)
+int	prepend_zero(t_type type)
 {
 	int i;
 
@@ -60,18 +55,18 @@ int	prepend_zero(t_type type, int digits)
 	{
 		if (type.width || type.flags.zero == 1)
 		{
-			i += print_zeros(type, digits);
+			i += print_zeros(type);
 		}
 	}
 	return (i);
 }
 
-int	prepend_space(t_type type, int digits)
+int	prepend_space(t_type type)
 {
 	int i;
 
 	i = 0;
 	if (type.flags.right == 1)
-		i += justify(type, digits);
+		i += justify(type);
 	return (i);
 }

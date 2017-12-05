@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -14,17 +15,27 @@
 
 int	percent_format(t_type type)
 {
-	int align;
 	int ret;
 
-	align = type.width;
-	if (align > 1 && type.flags.left == 0)
-		ret = width_format(type, align - 1);
+	ret = 0;
+	if (type.width > 1 && type.flags.left == 0)
+	{
+		type.width--;
+		ret += prepend_space(type);
+	}
+	if (type.width > 1  && type.flags.zero == 1)
+	{
+		ret += prepend_zero(type);
+	}
 	ft_putchar('%');
-	if (align > 1 && type.flags.left == 1)
-		ret = width_format(type, align - 1);
+	ret += 1;
+	if (type.width > 1 && type.flags.left == 1)
+	{
+		type.width--;
+		ret += justify(type);
+	}
 	if (type.width > 1)
-		return (type.width);
+		return (ret);
 	else
 		return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 16:37:53 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 18:58:22 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ int			int_format(t_type type, va_list ap)
 	digits = num_len(type.res.num);
 	total = digits;
 	type = set_flags(type, digits);
-	total += prepend_space(type, digits);
+	total += prepend_space(type);
 	total += display_sign(type);
-	total += prepend_zero(type, digits);
+	total += prepend_zero(type);
 	if (type.flags.precision == 1 && type.w_precision == 0 && type.res.num == 0)
 	{
 		type.width > 0 ? ft_putchar(' ') : 0;
@@ -104,6 +104,6 @@ int			int_format(t_type type, va_list ap)
 	}
 	print_max(type.res.num);
 	if (type.flags.left == 1)
-		total += justify(type, total);
+		total += justify(type);
 	return (total);
 }

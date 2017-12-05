@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:24:23 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 16:31:03 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/04 19:34:23 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,38 @@ int	display_x(t_type type)
 	return (i);
 }
 
-int	precision_check(t_type type)
+t_type	set_hex_flags(t_type type, int len)
+{
+	if (type.flags.left == 1)
+		type.flags.right = 0;
+	if (type.flags.zero == 1)
+		type.flags.right = 0;
+	if (type.w_precision > type.width)
+	{
+		type.flags.right = 0;
+		type.width = 0;
+	}
+	if (type.flags.hash == 1 && type.res.unum > 0)
+		type.width -= 2;
+	if (len > type.w_precision)
+		type.width -= len;
+	else
+		type.width -= type.w_precision;
+	if (type.w_precision > len)
+		type.w_precision -= len;
+	else
+		type.w_precision = 0;
+	return (type);
+}
+
+int	hex_length(uintmax_t val)
 {
 	int i;
 
 	i = 0;
-	while (i < type.width)
+	while (val)
 	{
-		ft_putchar(' ');
+		val /= 16;
 		i++;
 	}
 	return (i);
@@ -67,28 +91,24 @@ int	precision_check(t_type type)
 
 int	hex_format(t_type type, va_list ap)
 {
-	uintmax_t	temp;
-	int			digits;
-	int			i;
+	int	digits;
+	int	total;
+	int	ret;
 
+	total = 0;
 	type = u_arg_conversion(type, ap);
-	temp = type.res.unum;
-	digits = 0;
-	i = 0;
-	if (type.flags.precision == 1 && type.res.unum == 0)
-		return (precision_check(type));
-	while (temp /= 10)
-		digits++;
-	digits = digits + (type.flags.hash * 2);
-	if (type.flags.right == 1 && type.width > digits)
-		i += width_format(type, type.width - digits - 1);
-	i += display_x(type);
-	if (type.res.unum == 0)
+	digits = hex_length(type.res.unum);
+	type = set_hex_flags(type, digits);
+	total += prepend_space(type);
+	total += display_x(type);
+	total += prepend_zero(type);
+	if (type.flags.precision == 1 && type.w_precision == 0 && type.res.unum == 0)
+		return (total);
+	ret = hex_recursion(type.res.unum, type);
+	if (ret == 1 && type.res.unum == 0)
 		ft_putchar('0');
-	if (type.width > digits && type.flags.zero == 1)
-		i += width_format(type, type.width - digits - 1);
-	i += hex_recursion(type.res.unum, type);
-	if (type.flags.left == 1 && type.width > i)
-		i += width_format(type, type.width - i);
-	return (i);
+	total += ret;
+	if (type.flags.left == 1)
+		total += justify(type);
+	return (total);
 }
