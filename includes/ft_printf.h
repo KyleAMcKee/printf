@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 21:20:07 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 20:34:52 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct		s_flags
 	int		space;
 	int 	precision;
 	int		percent;
+	int		asterisk;
 }
 					t_flags;
 
