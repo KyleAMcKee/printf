@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:32:55 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 20:29:43 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 20:31:08 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_type	check_flags(const char *str, t_type type, int *i)
 		{
 			*i += 1;
 		ft_putstr("sup, nerds?\n");
-		exit(1);
+		exit(2);
 			}
 			j++;
 	}	
