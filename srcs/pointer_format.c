@@ -6,13 +6,13 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:43:40 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 17:39:59 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 23:20:26 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	pointer_print(uintmax_t val, t_type type)
+int		pointer_print(uintmax_t val, t_type type)
 {
 	char		hex[33];
 	static int	i;
@@ -63,7 +63,7 @@ t_type	set_flags_pointer(t_type type, int len)
 	return (type);
 }
 
-int	pointer_format(t_type type, va_list ap)
+int		pointer_format(t_type type, va_list ap)
 {
 	int	len;
 	int	total;
@@ -75,7 +75,8 @@ int	pointer_format(t_type type, va_list ap)
 	total += prepend_space(type);
 	ft_putstr("0x");
 	total += prepend_zero(type);
-	if (type.flags.precision == 1 && type.w_precision == 0 && type.res.unum == 0)
+	if (type.flags.precision == 1
+		&& type.w_precision == 0 && type.res.unum == 0)
 		return (total);
 	if (type.res.unum == 0 && !type.w_precision)
 	{

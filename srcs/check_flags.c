@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:32:55 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 21:04:07 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 23:21:19 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ t_type	check_flags(const char *str, t_type type, int *i)
 	type = check_length(str, type, i);
 	type = check_modifiers(str, type, i);
 	type.type = str[*i];
-	if ((check_conv(type.type, type) == -1 && ft_isalpha(type.type)) || type.type == '}')
+	if ((check_conv(type.type, type) == -1 && ft_isalpha(type.type))
+		|| type.type == '}')
 	{
 		if (!is_len(type.type))
 		{

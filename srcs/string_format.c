@@ -6,13 +6,13 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:16:39 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 19:46:48 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 23:18:39 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	string_zero_pad(t_type type, int length)
+int		string_zero_pad(t_type type, int length)
 {
 	int	total;
 	int	i;
@@ -51,15 +51,12 @@ t_type	set_string_flags(t_type type, int len)
 	}
 	else
 		type.width -= type.w_precision;
-	//if (len > type.w_precision)
-	//	type.width -= type.w_precision;
 	if (!type.flags.precision && type.width > len)
 		type.width -= len;
-//	if (type.w_precision == len)
 	return (type);
 }
 
-int	print_str(t_type type, int len)
+int		print_str(t_type type, int len)
 {
 	int i;
 
@@ -78,7 +75,7 @@ int	print_str(t_type type, int len)
 	return (len);
 }
 
-int	string_format(t_type type, va_list ap)
+int		string_format(t_type type, va_list ap)
 {
 	int		len;
 	int		total;
@@ -97,8 +94,7 @@ int	string_format(t_type type, va_list ap)
 	total += string_zero_pad(type, len);
 	total += prepend_space(type);
 	total += print_str(type, len);
-	//print_status(type);
 	if (type.flags.left == 1)
-		 total += justify(type);
+		total += justify(type);
 	return (total);
 }

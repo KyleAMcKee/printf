@@ -6,13 +6,13 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 13:53:09 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 19:30:41 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 23:17:03 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	unsigned_recursion(uintmax_t val)
+int		unsigned_recursion(uintmax_t val)
 {
 	char		dec[11];
 	static int	i;
@@ -62,7 +62,7 @@ t_type	set_unsigned_flags(t_type type, int len)
 	return (type);
 }
 
-int	unsigned_format(t_type type, va_list ap)
+int		unsigned_format(t_type type, va_list ap)
 {
 	int			total;
 	int			digits;
@@ -74,7 +74,8 @@ int	unsigned_format(t_type type, va_list ap)
 	type = set_unsigned_flags(type, digits);
 	total += prepend_space(type);
 	total += prepend_zero(type);
-	if (type.flags.precision == 1 && type.w_precision == 0 && type.res.unum == 0)
+	if (type.flags.precision == 1 &&
+		type.w_precision == 0 && type.res.unum == 0)
 		return (total);
 	ret = unsigned_recursion(type.res.unum);
 	if (ret == 1 && type.res.unum == 0)

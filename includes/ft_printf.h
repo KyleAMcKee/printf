@@ -6,12 +6,13 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 20:34:52 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 22:06:57 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include <stdarg.h>
+#include <stdlib.h>
 /*REMOVE*/ #include <stdio.h> /*REMOVE*/
 
 # define TYPES "sSpdDioOuUxXcC%"

@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 17:14:59 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 16:31:11 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 23:19:41 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +22,7 @@ int	percent_format(t_type type)
 		type.width--;
 		ret += prepend_space(type);
 	}
-	if (type.width > 1  && type.flags.zero == 1)
+	if (type.width > 1 && type.flags.zero == 1)
 	{
 		ret += prepend_zero(type);
 	}

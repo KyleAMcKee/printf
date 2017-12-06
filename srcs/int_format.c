@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:34:19 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 18:09:20 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 23:22:38 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_type		set_flags_int(t_type type, int len)
 	if (len >= type.w_precision && type.flags.zero && type.flags.precision)
 		type.flags.right = 1;
 	if (type.flags.space == 1 && type.flags.zero == 1)
-		type.width--;	
+		type.width--;
 	return (type);
 }
 
@@ -97,7 +97,6 @@ int			int_format(t_type type, va_list ap)
 	total += prepend_space(type);
 	total += display_sign(type);
 	total += prepend_zero(type);
-	//print_status(type);
 	if (type.flags.precision == 1 && type.w_precision == 0 && type.res.num == 0)
 	{
 		type.width > 0 ? ft_putchar(' ') : 0;

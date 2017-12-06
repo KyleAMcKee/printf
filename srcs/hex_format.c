@@ -6,13 +6,13 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:24:23 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 19:34:23 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 23:23:57 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	hex_recursion(uintmax_t val, t_type type)
+int		hex_recursion(uintmax_t val, t_type type)
 {
 	char		hex[33];
 	static int	i;
@@ -36,7 +36,7 @@ int	hex_recursion(uintmax_t val, t_type type)
 	return (i);
 }
 
-int	display_x(t_type type)
+int		display_x(t_type type)
 {
 	int i;
 
@@ -76,7 +76,7 @@ t_type	set_hex_flags(t_type type, int len)
 	return (type);
 }
 
-int	hex_length(uintmax_t val)
+int		hex_length(uintmax_t val)
 {
 	int i;
 
@@ -89,7 +89,7 @@ int	hex_length(uintmax_t val)
 	return (i);
 }
 
-int	hex_format(t_type type, va_list ap)
+int		hex_format(t_type type, va_list ap)
 {
 	int	digits;
 	int	total;
@@ -102,7 +102,8 @@ int	hex_format(t_type type, va_list ap)
 	total += prepend_space(type);
 	total += display_x(type);
 	total += prepend_zero(type);
-	if (type.flags.precision == 1 && type.w_precision == 0 && type.res.unum == 0)
+	if (type.flags.precision == 1 && type.w_precision == 0
+		&& type.res.unum == 0)
 		return (total);
 	ret = hex_recursion(type.res.unum, type);
 	if (ret == 1 && type.res.unum == 0)
