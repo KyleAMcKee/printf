@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 13:30:27 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 18:59:45 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 18:29:42 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ t_type		set_flags_octal(t_type type, int len)
 	if (type.w_precision > type.width)
 		type.width = 0;
 	if (type.flags.hash == 1)
+	{
+		type.w_precision--;
 		type.width--;
+	}
 	if (type.w_precision > len)
 		type.w_precision -= len;
 	else
@@ -70,7 +73,7 @@ int			octal_length(uintmax_t val)
 	i = 0;
 	while (val)
 	{
-		val /= 10;
+		val /= 8;
 		i++;
 	}
 	return (i);

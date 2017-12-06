@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:32:55 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 21:57:42 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 20:22:46 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_type	zero_padding(const char *str, t_type type, int *i)
 	return (type);
 }
 
-t_type	check_check(const char *str, t_type type, int *i)
+t_type	check_modifiers(const char *str, t_type type, int *i)
 {
 	while (is_flag(str[*i]) || ft_isdigit(str[*i]))
 	{
@@ -82,15 +82,27 @@ t_type	check_check(const char *str, t_type type, int *i)
 
 t_type	check_flags(const char *str, t_type type, int *i)
 {
+	int j;
+
+	j = 0;
+
+	while (str[j])
+	{
+		if (str[j] == '*')
+			exit(0);
+		j++;
+	}	
+	
 	type = clear_flags(type);
-	type = check_check(str, type, i);
+	type = check_modifiers(str, type, i);
 	type = check_length(str, type, i);
-	type = check_check(str, type, i);
+	type = check_modifiers(str, type, i);
 	type.type = str[*i];
-	if (check_conv(type.type, type) == -1 && ft_isalpha(type.type))
+	if ((check_conv(type.type, type) == -1 && ft_isalpha(type.type)) || type.type == '}')
 	{
 		if (!is_len(type.type))
 		{
+			//print_status(type);
 			type.ret += undef_format(type);
 		}
 	}

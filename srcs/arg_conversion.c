@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 22:51:16 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 16:57:14 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 19:20:13 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_type	arg_conversion(t_type type, va_list ap)
 		type.res.num = va_arg(ap, size_t);
 	else if (type.length.j == 1)
 		type.res.num = va_arg(ap, intmax_t);
-	else if (type.type == 's')
+	else if (type.type == 's' || type.type == 'S')
 		type.res.str = va_arg(ap, char*);
 	else
 		type.res.num = va_arg(ap, int);

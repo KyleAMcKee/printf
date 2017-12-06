@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:43:40 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/04 22:32:12 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 17:39:59 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ int	pointer_format(t_type type, va_list ap)
 	if (type.flags.precision == 1 && type.w_precision == 0 && type.res.unum == 0)
 		return (total);
 	if (type.res.unum == 0 && !type.w_precision)
+	{
+		total++;
 		ft_putchar('0');
+	}
 	if (type.res.unum > 0)
 		total += pointer_print(type.res.unum, type);
 	if (type.flags.left == 1)
