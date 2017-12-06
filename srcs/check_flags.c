@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:32:55 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 20:31:08 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/05 21:04:07 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_type	clear_flags(t_type type)
 	type.flags.space = 0;
 	type.flags.precision = 0;
 	type.flags.percent = 0;
+	type.flags.asterisk = 0;
 	return (type);
 }
 
@@ -75,6 +76,8 @@ t_type	check_modifiers(const char *str, t_type type, int *i)
 			type.flags.plus = 1;
 		else if (str[*i] == ' ')
 			type.flags.space = 1;
+		else if (str[*i] == '*')
+			type.flags.asterisk = 1;
 		*i += 1;
 	}
 	return (type);
@@ -82,21 +85,6 @@ t_type	check_modifiers(const char *str, t_type type, int *i)
 
 t_type	check_flags(const char *str, t_type type, int *i)
 {
-	int j;
-
-	j = 0;
-
-	while (str[j])
-	{
-		if (str[j] == '*')
-		{
-			*i += 1;
-		ft_putstr("sup, nerds?\n");
-		exit(2);
-			}
-			j++;
-	}	
-	
 	type = clear_flags(type);
 	type = check_modifiers(str, type, i);
 	type = check_length(str, type, i);
@@ -106,7 +94,6 @@ t_type	check_flags(const char *str, t_type type, int *i)
 	{
 		if (!is_len(type.type))
 		{
-			//print_status(type);
 			type.ret += undef_format(type);
 		}
 	}
