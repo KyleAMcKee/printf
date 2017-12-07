@@ -6,23 +6,14 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:02:32 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/07 14:25:39 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/07 14:54:38 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	type_error_handler(t_type type)
-{
-	if (type.type == 'C' && type.length.hh == 1)
-		return (1);
-	return (0);
-}
-
 int	type_handler(t_type type, va_list ap)
 {
-	if (type_error_handler(type))
-		return (-1);
 	if (type.type == '%')
 		return (percent_format(type));
 	else if ((type.type == 'c' && type.length.l != 1) || type.type == 'C')
