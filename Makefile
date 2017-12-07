@@ -6,7 +6,7 @@
 #    By: kmckee <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 10:55:28 by kmckee            #+#    #+#              #
-#    Updated: 2017/12/05 15:52:10 by kmckee           ###   ########.fr        #
+#    Updated: 2017/12/06 12:13:35 by kmckee           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,7 +27,8 @@ SOURCES		=	ft_printf.c \
 				octal_format.c unsigned_format.c \
 				percent_format.c width_format.c \
 				pointer_format.c wchar_format.c \
-				print_max.c undef_format.c
+				print_max.c undef_format.c \
+				binary_format.c
 
 SRCS		=	$(addprefix $(SRCDIR), $(SOURCES))
 OBJS		=	$(addprefix $(OBJDIR), $(SOURCES:.c=.o))
@@ -35,7 +36,7 @@ OBJS		=	$(addprefix $(OBJDIR), $(SOURCES:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "\x1b[31mCreating Library...\x1b[0m"
+	@echo "\x1b[31m\nBeep boop beep boop...\x1b[0m"
 	@make re -C $(LIBFT)
 	@cp libft/libft.a ./$(NAME)
 	@ar rc $(NAME) $(OBJS)
@@ -45,12 +46,13 @@ $(NAME): $(OBJS)
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	@mkdir -p temp
 	@$(CC) $(FLAGS) -I $(INCDIR) -c -o $@ $<
+	@printf "\x1b[33m*\x1b[0m"
 
 test:
-	make re
-	$(CC) $(FLAGS) -o test main.c print_status.c $(NAME)
-	make clean
-	./test
+	@make re
+	@$(CC) $(FLAGS) -o test main.c print_status.c $(NAME)
+	@make clean
+	@./test
 
 undef:
 	make re
@@ -58,13 +60,14 @@ undef:
 	make clean
 
 clean:
-	@echo "\x1b[31mRemoving object files...\x1b[0m"
+	@echo "\x1b[31mCompiling...\x1b[0m"
 	@rm -f $(OBJS)
 	@make clean -C $(LIBFT)
-	@echo "\x1b[32mDone\x1b[0m"
 
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C $(LIBFT)
 
 re: fclean all
+
+.PHONY: all test clean fclean re
