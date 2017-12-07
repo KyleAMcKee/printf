@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:32:55 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/07 13:03:16 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/07 14:01:56 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		check_conv(char c, t_type type)
 {
-	char	types[18];
+	char	types[19];
 	int		i;
 
 	i = 0;
@@ -87,7 +87,6 @@ t_type	check_modifiers(const char *str, t_type type, int *i, va_list ap)
 			type.flags.asterisk = 1;
 			type = check_asterisk(type, ap);
 		}
-		//print_status(type);
 		*i += 1;
 	}
 	return (type);
@@ -104,14 +103,10 @@ t_type	check_flags(const char *str, t_type type, int *i, va_list ap)
 		|| type.type == '}')
 	{
 		if (!is_len(type.type))
-		{
 			type.ret += undef_format(type);
-		}
 	}
 	if (type.flags.asterisk == 1 && type.type == 's' && type.w_precision < 0)
 		type = clear_flags(type);
-//	print_status(type);
 	*i += 1;
 	return (type);
 }
-

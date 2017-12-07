@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 21:25:58 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/07 12:01:28 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/07 13:33:39 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,31 @@ t_type	is_zero(const char *str, t_type type, int *i, int temp)
 	return (type);
 }
 
+t_type	is_period(const char *str, t_type type, int *i, int temp)
+{
+	type.flags.precision += 1;
+	if (ft_isdigit(str[*i + 1]))
+		type.w_precision = ft_atoi(&str[++*i]);
+	else
+	{
+		type.w_precision = 0;
+		return (type);
+	}
+	temp = type.w_precision;
+	while (temp /= 10)
+		*i += 1;
+	return (type);
+}
+
 t_type	check_width(const char *str, t_type type, int *i)
 {
 	int temp;
 
 	temp = 0;
 	if (ft_isdigit(str[*i]) && type.flags.asterisk)
-	{	
+	{
 		type = is_zero(str, type, i, temp);
-		return type;
+		return (type);
 	}
 	if (ft_isdigit(str[*i]) && !type.width)
 	{
@@ -64,18 +80,6 @@ t_type	check_width(const char *str, t_type type, int *i)
 	if (str[*i] == '-')
 		type = is_minus(str, type, i, temp);
 	else if (str[*i] == '.')
-	{
-		type.flags.precision += 1;
-		if (ft_isdigit(str[*i + 1]))
-			type.w_precision = ft_atoi(&str[++*i]);
-		else
-		{
-			type.w_precision = 0;
-			return (type);
-		}
-		temp = type.w_precision;
-		while (temp /= 10)
-			*i += 1;
-	}
+		type = is_period(str, type, i, temp);
 	return (type);
 }

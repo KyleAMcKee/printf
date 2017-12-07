@@ -6,7 +6,7 @@
 /*   By: kmckee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:09:47 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/07 12:48:58 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/07 13:26:23 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_type	check_asterisk(t_type type, va_list ap)
 {
-	int temp;
-	
+	int	temp;
+
 	temp = va_arg(ap, int);
 	if (temp < 0 && !type.flags.precision)
 	{
@@ -24,7 +24,6 @@ t_type	check_asterisk(t_type type, va_list ap)
 	}
 	else if (temp <= 0 && type.flags.precision)
 	{
-		//temp *= -1;
 		if (type.width)
 			type.w_precision = type.width;
 		else

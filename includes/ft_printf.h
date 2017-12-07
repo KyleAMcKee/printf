@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:45:05 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/07 11:14:46 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/07 14:28:19 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "color.h"
 /*REMOVE*/ #include <stdio.h> /*REMOVE*/
 
-# define TYPES "sSpdDioOuUxXcC%bB"
+# define TYPES "sSpdDioOuUxXcC%bBn"
 # define HEX "0123456789abcdef0123456789ABCDEF"
 # define OCT "01234567"
 # define DEC "0123456789"
@@ -58,6 +58,7 @@ typedef struct		s_length
 
 typedef union
 {
+	int				*intp;
 	wchar_t			chr;
 	char			*str;
 	wchar_t			*wstr;
@@ -108,5 +109,6 @@ int		prepend_space(t_type type);
 int		is_len(char c);
 void	print_max(intmax_t num);
 void	print_status(t_type type);
+int		n_format(t_type type, va_list ap);
 
 #endif
