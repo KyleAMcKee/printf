@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:32:55 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/06 19:26:02 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/06 19:43:27 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,14 @@ t_type	check_flags(const char *str, t_type type, int *i, va_list ap)
 	}
 	if (type.flags.asterisk == 1)
 	{
-		type.width = va_arg(ap, int);
+		int temp;
+		temp = va_arg(ap, int);
+		if (temp > type.width)
+			type.width = temp;
+		if (!type.flags.zero && !type.flags.left)
+			type.flags.right = 1;
 	}
+	//print_status(type);
 	*i += 1;
 	return (type);
 }
