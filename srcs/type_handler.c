@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:02:32 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 23:14:28 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/06 12:21:17 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ int	type_handler(t_type type, va_list ap)
 		return (unsigned_format(type, ap));
 	else if (type.type == 'p')
 		return (pointer_format(type, ap));
+	else if (type.type == 'b' || type.type == 'B')
+		return (binary_format(type, ap));
 	return (0);
 }

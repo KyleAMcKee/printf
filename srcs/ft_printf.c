@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:39:24 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 22:19:09 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/06 19:15:26 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_printf(const char *restrict format, ...)
 		{
 			write(1, &format[pos.start], pos.i - pos.start);
 			type.ret += (pos.i++ - pos.start);
-			type = check_flags(format, type, &pos.i);
+			type = check_flags(format, type, &pos.i, ap);
 			if (!type.type)
 				return (type.ret);
 			type.ret += type_handler(type, ap);

@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 22:51:16 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 19:20:13 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/06 12:19:00 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_type	u_arg_conversion(t_type type, va_list ap)
 {
 	if (type.type == 'p' || type.type == 'U' || type.type == 'O')
 		type.res.unum = va_arg(ap, unsigned long);
+	else if (type.type == 'B' || type.type == 'b')
+		type.res.unum = va_arg(ap, uintmax_t);
 	else if (type.length.l == 1)
 		type.res.unum = va_arg(ap, unsigned long);
 	else if (type.length.ll == 1)
