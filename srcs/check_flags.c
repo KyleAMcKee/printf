@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:32:55 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/06 19:43:27 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/07 13:03:16 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ t_type	clear_flags(t_type type)
 	type.flags.precision = 0;
 	type.flags.percent = 0;
 	type.flags.asterisk = 0;
+	type.length.h = 0;
+	type.length.hh = 0;
+	type.length.l = 0;
+	type.length.ll = 0;
+	type.length.j = 0;
+	type.length.z = 0;
 	return (type);
 }
 
@@ -62,7 +68,7 @@ t_type	zero_padding(const char *str, t_type type, int *i)
 	return (type);
 }
 
-t_type	check_modifiers(const char *str, t_type type, int *i)
+t_type	check_modifiers(const char *str, t_type type, int *i, va_list ap)
 {
 	while (is_flag(str[*i]) || ft_isdigit(str[*i]))
 	{
@@ -77,7 +83,11 @@ t_type	check_modifiers(const char *str, t_type type, int *i)
 		else if (str[*i] == ' ')
 			type.flags.space = 1;
 		else if (str[*i] == '*')
+		{
 			type.flags.asterisk = 1;
+			type = check_asterisk(type, ap);
+		}
+		//print_status(type);
 		*i += 1;
 	}
 	return (type);
@@ -86,9 +96,9 @@ t_type	check_modifiers(const char *str, t_type type, int *i)
 t_type	check_flags(const char *str, t_type type, int *i, va_list ap)
 {
 	type = clear_flags(type);
-	type = check_modifiers(str, type, i);
+	type = check_modifiers(str, type, i, ap);
 	type = check_length(str, type, i);
-	type = check_modifiers(str, type, i);
+	type = check_modifiers(str, type, i, ap);
 	type.type = str[*i];
 	if ((check_conv(type.type, type) == -1 && ft_isalpha(type.type))
 		|| type.type == '}')
@@ -98,16 +108,9 @@ t_type	check_flags(const char *str, t_type type, int *i, va_list ap)
 			type.ret += undef_format(type);
 		}
 	}
-	if (type.flags.asterisk == 1)
-	{
-		int temp;
-		temp = va_arg(ap, int);
-		if (temp > type.width)
-			type.width = temp;
-		if (!type.flags.zero && !type.flags.left)
-			type.flags.right = 1;
-	}
-	//print_status(type);
+	if (type.flags.asterisk == 1 && type.type == 's' && type.w_precision < 0)
+		type = clear_flags(type);
+//	print_status(type);
 	*i += 1;
 	return (type);
 }

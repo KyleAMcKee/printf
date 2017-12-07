@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 21:25:58 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 20:34:09 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/07 12:01:28 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ t_type	check_width(const char *str, t_type type, int *i)
 	int temp;
 
 	temp = 0;
+	if (ft_isdigit(str[*i]) && type.flags.asterisk)
+	{	
+		type = is_zero(str, type, i, temp);
+		return type;
+	}
 	if (ft_isdigit(str[*i]) && !type.width)
 	{
 		type = is_zero(str, type, i, temp);

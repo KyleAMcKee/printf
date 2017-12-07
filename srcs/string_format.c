@@ -6,7 +6,7 @@
 /*   By: kmckee <kmckee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:16:39 by kmckee            #+#    #+#             */
-/*   Updated: 2017/12/05 23:18:39 by kmckee           ###   ########.fr       */
+/*   Updated: 2017/12/07 13:02:52 by kmckee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		string_format(t_type type, va_list ap)
 	total = 0;
 	len = 0;
 	type = arg_conversion(type, ap);
-	if (type.res.str == NULL && !type.width)
+	if (type.res.str == NULL && !type.flags.precision)
 	{
 		ft_putstr("(null)");
 		return (6);
