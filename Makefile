@@ -6,7 +6,7 @@
 #    By: kmckee <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 10:55:28 by kmckee            #+#    #+#              #
-#    Updated: 2017/12/06 12:13:35 by kmckee           ###   ########.fr        #
+#    Updated: 2017/12/07 11:15:55 by kmckee           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,8 +20,8 @@ FLAGS		=	-Wall -Werror -Wextra
 
 SOURCES		=	ft_printf.c \
 				check_flags.c check_length.c \
-				type_handler.c check_width.c\
-				arg_conversion.c \
+				type_handler.c check_width.c \
+				arg_conversion.c check_asterisk.c \
 				char_format.c string_format.c \
 				int_format.c hex_format.c \
 				octal_format.c unsigned_format.c \
