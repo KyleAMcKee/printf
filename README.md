@@ -1,4 +1,4 @@
-# 42 Project: FDF
+# 42 Project: Printf
 
 This program was made to mimic the functionality of printf. Writing well-structured and extensible code was necessary to complete this project. The concept of variadic functions was also introduced.
 
